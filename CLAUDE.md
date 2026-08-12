@@ -69,10 +69,11 @@ reviewing them. Treat potential self-harm signals as urgent human-review cases,
 not automated conclusions: write no raw text to a flag record, do not perform
 outreach or diagnosis, and follow the approved human safety escalation process.
 
-Use `src/conversation_browser.py` only as a local, read-only review aid in an
-authorized environment. A future browser-to-flag action must require explicit
-human confirmation and may invoke only the fixed flag tools with validated,
-text-free arguments; it must never auto-flag or execute arbitrary commands.
+Use `src/conversation_browser.py` only as a local review aid in an authorized
+environment. Its only write paths are explicit, human-confirmed, fixed-field
+flag creation and append-only `withdrawn`/`not_tracking` lifecycle events with
+validated, text-free arguments. It must never auto-flag, change status from a
+model signal, delete audit history, or execute arbitrary commands.
 
 ## Expected output conventions
 

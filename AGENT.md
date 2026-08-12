@@ -114,8 +114,9 @@ issue, changelog, and independent-review rules in that playbook.
 - Do not attempt diagnosis, counseling, risk scoring, or automated outreach.
   Immediately route flagged cases to an authorized human reviewer through the
   organization's approved safety escalation process.
-- Do not close or downgrade a flagged case without explicit direction from an
-  authorized human reviewer.
+- An authorized human reviewer may append a `withdrawn` or `not_tracking`
+  lifecycle event only with explicit confirmation and a text-free operational
+  reason. Never delete or rewrite the original flag or event history.
 - Use `src/flag_chat_case.py` to add a case. It must receive an explicit
   human/manual assessment source and a minimal operational note; never supply
   raw conversation text in its arguments or output.
@@ -197,8 +198,10 @@ issue, changelog, and independent-review rules in that playbook.
   reports, flag records, tool arguments, terminal output, or logs.
 - After authorized review, use the browser's fixed-field **Create human review
   flag** form or `src/flag_chat_case.py` for a new case; use
-  `src/add_flag_case_note.py` for an existing open case. The browser form
-  requires explicit confirmation and must not accept raw conversation text.
+  `src/add_flag_case_note.py` for an existing open case. For an open case,
+  `src/change_flag_case_status.py` or the browser lifecycle form may append
+  `withdrawn` or `not_tracking` after a separate explicit confirmation. These
+  forms must not accept raw conversation text.
 - The browser must not execute arbitrary commands, accept arbitrary script
   paths, or auto-flag based on emotion labels or message content.
 
@@ -207,7 +210,8 @@ issue, changelog, and independent-review rules in that playbook.
 - The local-only action invokes only the fixed flag creation path with
   allowlisted category, priority, and assessment-source values.
 - Require category, priority, assessment source, and a text-free operational
-  note; reject raw conversation text and duplicate open cases.
+  note; reject raw conversation text and duplicate cases. Lifecycle changes
+  additionally require a terminal status and separate human confirmation.
 - This action is enabled because explicit authorization, fixed-input validation,
   text-free audit records, duplicate-open-case protection, and synthetic safety
   tests are implemented. Never auto-create a safety flag.

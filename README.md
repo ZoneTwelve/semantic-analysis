@@ -122,11 +122,12 @@ python src/flag_chat_case.py \
   --category potential_self_harm \
   --priority urgent \
   --assessment-source authorized_human_review \
-  --review-note 'Credible safety concern; immediate human review required.'
+  --review-note 'Credible safety concern; immediate human review required.' \
+  --human-confirmed
 ```
 
 Use `--dry-run` first to validate a proposed record. The tool verifies that the
-chat exists, refuses a duplicate open case, appends a text-free JSONL record,
+chat exists, refuses a duplicate case (preserving its lifecycle history), appends a text-free JSONL record,
 and refreshes the flagged-case manifest.
 
 To add an authorized review update to an existing open case without duplicating
@@ -138,6 +139,23 @@ python src/add_flag_case_note.py \
   --source authorized_human_review \
   --note 'Explicit self-harm intent and method with farewell/aftercare signals; immediate human review required.'
 ```
+
+To correct an accidental flag or exclude a reviewed case from ongoing tracking,
+append a human-confirmed lifecycle event; this never deletes or rewrites the
+original flag:
+
+```bash
+python src/change_flag_case_status.py \
+  --chat-id '<chat-id>' \
+  --status withdrawn \
+  --assessment-source authorized_human_review \
+  --review-note 'Created in error during manual review.' \
+  --human-confirmed
+```
+
+Use `--status not_tracking` only after an authorized human decides the case
+should be excluded from active review. Both statuses are text-free audit events
+in `flag-case-events.jsonl`; absent events resolve to `open`.
 
 ## Data handling
 
@@ -234,11 +252,15 @@ into reports, flag records, command arguments, or logs.
 
 After authorized review, use the selected chat's **Create human review flag**
 form. It requires a category, priority, assessment source, text-free
-operational note, and an explicit confirmation checkbox. The local browser uses
-the same validation and output schema as `src/flag_chat_case.py`; it rejects
-invalid choices, unknown chats, and duplicate open cases. It never auto-flags
-from model labels or conversation text. Use `src/add_flag_case_note.py` to add
-a text-free update to an existing open case.
+operational note, and an explicit confirmation checkbox. For an open case, the
+browser shows **Withdraw flag** and **Mark not tracking** lifecycle choices.
+Each requires a text-free reason and a separate confirmation, appends an audit
+event, and never deletes the original flag. The **Show open flags only** filter
+excludes withdrawn and not-tracking cases. The local browser uses the same
+validation and output schema as `src/flag_chat_case.py`; it rejects invalid
+choices, unknown chats, duplicate cases, and missing human confirmation. It
+never auto-flags or changes a status from model labels or conversation text.
+Use `src/add_flag_case_note.py` only for an existing open case.
 
 ### Browser tests
 
