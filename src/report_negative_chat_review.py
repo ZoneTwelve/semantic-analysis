@@ -1,4 +1,4 @@
-#!/usr/bin/env python3
+#!/usr/bin/env python
 """Build a no-text Markdown review table for all negative-signal chats."""
 from __future__ import annotations
 
@@ -6,6 +6,8 @@ import argparse
 import json
 from datetime import datetime, timezone
 from pathlib import Path
+
+from flag_chat_case import current_statuses
 
 
 def main() -> None:
@@ -18,15 +20,23 @@ def main() -> None:
     flag_path = Path(args.flags)
     if flag_path.exists():
         flags = {item["chatId"]: item for line in flag_path.read_text(encoding="utf-8").splitlines() if line.strip() for item in [json.loads(line)]}
+    statuses = current_statuses(flag_path.parent)
     records = [item for line in Path(args.input).read_text(encoding="utf-8").splitlines() if line.strip() for item in [json.loads(line)]]
     records.sort(key=lambda item: item["maxNegativeScore"], reverse=True)
     rows = []
     for item in records:
         flag = flags.get(item["chatId"])
         labels = ", ".join(f"{signal['emotion']} ({signal['score']:.3f})" for signal in item["signals"])
-        if flag:
-            review_status = f"FLAGGED: {flag['priority']}/{flag['status']}"
+        flag_status = statuses.get(item["chatId"])
+        if flag_status == "open":
+            review_status = f"FLAGGED: {flag['priority']}/open"
             action = "Immediate authorized human safety review"
+        elif flag_status == "not_tracking":
+            review_status = "Excluded: not tracking"
+            action = "Do not add to active review; preserve lifecycle audit history"
+        elif flag_status == "withdrawn":
+            review_status = "Withdrawn"
+            action = "Not an active flag; preserve lifecycle audit history"
         elif item["imageGenerationLikely"]:
             review_status = "Excluded: image-generation-like"
             action = "No affect review; retain as audit exclusion"
@@ -48,6 +58,7 @@ def main() -> None:
         "## Review guidance",
         "",
         "- `FLAGGED` cases require the approved human safety escalation process; do not rely on model output alone.",
+        "- `Excluded: not tracking` and `Withdrawn` are human lifecycle decisions, not model conclusions; do not treat them as active flags.",
         "- `Excluded: image-generation-like` indicates creative content may have caused a false affect signal.",
         "- For `Open for review`, inspect original content only through the approved system. Record product-issue findings as hypotheses with evidence.",
     ]
