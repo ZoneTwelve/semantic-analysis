@@ -12,6 +12,7 @@ issues/
 ├── CHANGELOG.md              # accepted/done issue summaries
 ├── templates/
 │   └── issue.md              # starting point for new issues
+├── reviews/                  # independent reviewer artifacts
 ├── active/                   # pending, in_progress, blocked, in_review, changes_requested
 └── archive/
     ├── done/                 # accepted issues; immutable except clerical fixes
@@ -71,6 +72,7 @@ Related files: `path/one`, `path/two`
 - Execution DRI: unassigned
 - Product / System Steward: unassigned
 - Engineering DRI: unassigned
+- System Architect: not required
 - Data / ML reviewer: not required
 - Safety / Privacy reviewer: not required
 - QA / Review approver: unassigned
@@ -123,6 +125,8 @@ Related files: `path/one`, `path/two`
 Only one issue owner may actively modify an `in_progress` issue at a time.
 For role responsibilities, approval independence, and multi-agent handoffs,
 follow [roles-and-governance.md](../playbooks/roles-and-governance.md).
+For independent review artifacts and CI ownership, follow
+[reviews-and-ci-governance.md](../playbooks/reviews-and-ci-governance.md).
 
 ## Working an issue
 

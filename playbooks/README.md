@@ -19,6 +19,7 @@ and `issues/README.md`.
 | Git worktrees, branches, pull requests, concurrent implementation | [worktrees-and-prs.md](worktrees-and-prs.md) |
 | New local applications or app changes | [app-development.md](app-development.md) |
 | New feature request, discovery, or product triage | [feature-intake.md](feature-intake.md) |
+| Independent review, architecture decisions, CI ownership | [reviews-and-ci-governance.md](reviews-and-ci-governance.md) |
 
 Read every playbook that applies before making changes. If rules conflict, use
 this precedence order: user request → `AGENT.md` → `CLAUDE.md` → relevant

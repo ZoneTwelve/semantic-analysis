@@ -23,6 +23,7 @@ rules still apply.
 | --- | --- | --- | --- |
 | **PM / System Steward** | Scope, requirements, workflow quality, playbooks, system standards, cross-team priorities. | Create/update playbooks; review issue scope and acceptance criteria; request standardization work. | Override user intent, safety/privacy rules, or approve their own material implementation without independent review. |
 | **Engineer** | Implement code, APIs, CLIs, UI, tests, and migrations. | Technical design within approved issue scope; propose trade-offs. | Change product/safety policy, expose services publicly, or self-approve material code changes. |
+| **System Architect** | Architecture boundaries, integrations, runtime/dependency direction, and CI ownership. | Approve or block material architecture/CI changes; define CI standards and rollback expectations. | Bypass user authorization, safety/privacy controls, protected-branch rules, or independent review for material CI changes. |
 | **Data / ML Analyst** | Dataset contracts, preprocessing, evaluation, model outputs, analytical validity. | Local analysis design, metrics, and documented limitations. | Treat model outputs as facts, change raw data, or send data to external services without approval. |
 | **Safety / Privacy Steward** | Sensitive-data handling, safety-review workflows, access boundaries, and escalation constraints. | Block unsafe flows; require human review and minimal-data handling. | Diagnose users, automate outreach, or lower safety controls without explicit user authorization. |
 | **QA / Reviewer** | Validate acceptance criteria, regression risk, documentation, and test evidence. | Approve, reject, or request changes based on evidence. | Review their own material implementation as sole reviewer. |
@@ -76,6 +77,7 @@ Every new issue must declare:
 Execution DRI: one named agent
 Product / System Steward: named agent or unassigned
 Engineering DRI: named agent or unassigned
+System Architect: named agent, `not required`, or `unassigned`
 Data / ML reviewer: named agent or not required
 Safety / Privacy reviewer: named agent or not required
 QA / Review approver: named agent or unassigned
@@ -101,6 +103,7 @@ Contributors: zero or more agents
 | Safety/privacy workflow | Above plus Safety/Privacy review and human-escalation constraints. |
 | Governance/playbook/stack | Issue, rationale, migration impact, playbook updates, PM + independent review. |
 | Dependency/runtime upgrade | Issue, compatibility/rollback plan, validation, maintenance changelog. |
+| CI/architecture change | Above plus named System Architect, architecture-CI review artifact, CI rollback plan, and required PR approval. |
 
 ## Handoff format
 
