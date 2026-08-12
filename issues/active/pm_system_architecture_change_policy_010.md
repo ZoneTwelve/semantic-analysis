@@ -30,6 +30,8 @@ required before a PR may merge.
 - Define minimum CI/test requirements per change class.
 - Define review requirements: automated checks, independent agent review, and
   explicit human `LGTM`/approval.
+- Define and enforce the `needs-human-review` GitHub PR label for every change
+  class requiring an explicit human merge decision.
 - Define merge authority, including when auto-merge is permitted, prohibited,
   or requires a named System Architect.
 - Clarify System Architect responsibilities, handoffs, and overlap with PM,
@@ -78,6 +80,11 @@ Define the exact meaning of `LGTM` / approval:
 - whether author self-merge is allowed after approval;
 - auto-merge policy and hard prohibitions.
 
+When human approval is required, the PR must carry the GitHub label
+`needs-human-review`. The policy must specify who applies/removes it, whether it
+is assigned at PR creation, and the required approval evidence before removal
+or merge. A missing label is a merge blocker for human-gated change classes.
+
 At minimum, document that explicit human approval is mandatory for safety,
 privacy, CI/architecture, external exposure, production deployment, destructive
 operations, and changes involving sensitive data access or retention.
@@ -89,6 +96,8 @@ operations, and changes involving sensitive data access or retention.
 - [ ] System Architect scope, decision rights, and prohibited actions are clear.
 - [ ] `LGTM`/approval and reviewer-artifact requirements are unambiguous and
   auditable.
+- [ ] Human-gated pull requests require and document the
+  `needs-human-review` label lifecycle and merge blocker behavior.
 - [ ] Policy distinguishes documentation-only changes from engineering changes
   without allowing safety-sensitive work to be misclassified.
 - [ ] Required updates to playbooks, issue templates, GitHub settings, and
@@ -99,6 +108,8 @@ operations, and changes involving sensitive data access or retention.
 - [ ] 1. Assign PM/System Steward and System Architect participants.
 - [ ] 2. Inventory repository change types and propose classification matrix.
 - [ ] 3. Decide CI and human-approval gates with Safety/Privacy and QA input.
+- [ ] 3a. Define `needs-human-review` PR label ownership, lifecycle, and merge
+  enforcement for human-gated changes.
 - [ ] 4. Record merge/auto-merge policy and GitHub enforcement backlog.
 - [ ] 5. Open separate implementation issues for accepted policy changes.
 
@@ -115,6 +126,7 @@ operations, and changes involving sensitive data access or retention.
 | Date | Status | Update | Evidence |
 | --- | --- | --- | --- |
 | 2026-08-13 | pending | Created at user request for PM-led clarification of change classification, CI, human `LGTM`, and System Architect merge authority. | `playbooks/roles-and-governance.md`, `playbooks/reviews-and-ci-governance.md` |
+| 2026-08-13 | pending | GitHub label `needs-human-review` created; PM policy must define its required use and enforcement for human-gated PRs. | GitHub label configuration |
 
 ## Review / PR record
 
@@ -128,3 +140,4 @@ operations, and changes involving sensitive data access or retention.
 ## Changelog
 
 - 2026-08-13: Created PM-led System Architect scope and change-gate clarification issue.
+- 2026-08-13: Added required `needs-human-review` PR-label lifecycle decision; GitHub label created.
