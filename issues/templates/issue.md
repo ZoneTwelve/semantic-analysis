@@ -2,6 +2,7 @@
 
 Status: `pending`
 Owner: unassigned
+Agent nickname: unassigned
 Created: YYYY-MM-DD
 Updated: YYYY-MM-DD
 Related files: `path/one`, `path/two`

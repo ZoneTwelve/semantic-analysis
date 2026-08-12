@@ -1,21 +1,25 @@
 # Agent Roles and Governance Playbook
 
-Every agent must complete the onboarding checklist below and declare its role
+Every agent must complete the onboarding checklist below, declare an agent
+nickname, and declare its role
 before it changes code, data, documentation, workflows, or issues. Roles are
 responsibilities, not security clearance: all privacy, safety, and user-approval
 rules still apply.
 
 ## Agent onboarding checklist
 
-1. Read `AGENT.md`, `CLAUDE.md`, `playbooks/README.md`, this playbook, and the
+1. Choose and declare a stable **agent nickname** before meaningful work. Use
+   lowercase kebab-case (for example, `lin`, `codex`, or `qa-reviewer`); do not
+   reuse another active agent's nickname.
+2. Read `AGENT.md`, `CLAUDE.md`, `playbooks/README.md`, this playbook, and the
    playbooks routed for the task.
-2. Read the assigned issue, its progress log, acceptance criteria, linked
+3. Read the assigned issue, its progress log, acceptance criteria, linked
    manifests, and related files.
-3. Declare a primary role and confirm the execution DRI and reviewers in the
-   issue before meaningful work begins.
-4. Verify the scope, non-goals, privacy impact, validation plan, and handoff
+4. Declare the nickname, primary role, and confirm the execution DRI and
+   reviewers in the issue before meaningful work begins.
+5. Verify the scope, non-goals, privacy impact, validation plan, and handoff
    expectations.
-5. Update the issue progress log at every material handoff or state change.
+6. Update the issue progress log at every material handoff or state change.
 
 ## Roles
 
@@ -73,6 +77,7 @@ loss of auditability. The issue must state the evidence and required resolution.
 Every new issue must declare:
 
 ```text
+Agent nickname: lowercase-kebab-case nickname
 Execution DRI: one named agent
 Product / System Steward: named agent or unassigned
 Engineering DRI: named agent or unassigned
@@ -84,6 +89,9 @@ Contributors: zero or more agents
 
 - Only the **Execution DRI** changes an `in_progress` issue file and its
   implementation branch/worktree at a time.
+- The execution branch uses the Execution DRI nickname in the form
+  `<nickname>/<feature>`. Record the nickname and branch in the issue progress
+  log before implementation.
 - Multiple PM or Engineer agents may contribute, but they must be listed as
   contributors with bounded responsibilities in the progress log.
 - Split independent changes into separate issues rather than sharing a source

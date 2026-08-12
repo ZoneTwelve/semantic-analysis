@@ -2,6 +2,7 @@
 
 Status: `pending`
 Owner: unassigned
+Agent nickname: unassigned
 Created: YYYY-MM-DD
 Updated: YYYY-MM-DD
 Requested by: user / team / system

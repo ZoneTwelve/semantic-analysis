@@ -5,8 +5,8 @@ tests, applications, or governed documentation.
 
 ## Before creating a worktree
 
-1. Read the issue and set its `Execution DRI`, roles, acceptance criteria, and
-   validation plan.
+1. Complete onboarding, declare the agent nickname, and set it with the
+   `Execution DRI`, roles, acceptance criteria, and validation plan in the issue.
 2. Run `git status --short`, `git branch --show-current`, and
    `git worktree list` in the primary checkout.
 3. Do not touch or stage files that another agent has modified, created, or
@@ -19,8 +19,8 @@ tests, applications, or governed documentation.
 Use one branch and one worktree per implementation issue:
 
 ```text
-Branch:    issue/<id>-<short-slug>
-Worktree:  ../semantic-analysis-<id>-<short-slug>
+Branch:    <nickname>/<feature>
+Worktree:  ../semantic-analysis-<nickname>-<feature>
 PR title:  [<id>] Short imperative summary
 ```
 
@@ -28,9 +28,14 @@ Example:
 
 ```bash
 git fetch origin main
-git worktree add ../semantic-analysis-008-delivery-workflow \
-  -b issue/008-delivery-workflow origin/main
+git worktree add ../semantic-analysis-lin-translate-chat \
+  -b lin/translate-chat origin/main
 ```
+
+`<nickname>` is the stable lowercase-kebab-case nickname declared during
+onboarding. `<feature>` is a short lowercase-kebab-case description of the
+work, not an issue number. Existing branches retain historical names; do not
+rename them merely to meet this policy.
 
 The worktree path must be outside the primary repository directory when
 possible. Never create a worktree inside `data/`, `apps/`, or another agent's
@@ -50,11 +55,11 @@ worktree. Do not copy private data, model artifacts, or `.env` files into it.
 
 ## Pull request lifecycle
 
-1. Push the branch with `git push -u origin issue/<id>-<short-slug>`.
+1. Push the branch with `git push -u origin <nickname>/<feature>`.
 2. Create a PR using `gh pr create`:
 
    ```bash
-   gh pr create --base main --head issue/<id>-<short-slug> \
+   gh pr create --base main --head <nickname>/<feature> \
      --title '[<id>] Short summary' \
      --body-file /path/to/pr-summary.md
    ```
