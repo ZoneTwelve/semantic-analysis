@@ -48,6 +48,13 @@ Use lowercase `snake_case` for `<issue>` and a three-digit, monotonically
 increasing `<id>`. Never rename an existing issue file after work begins,
 because the path is its stable local identifier.
 
+Before creating a new implementation branch, complete onboarding and declare a
+unique lowercase-kebab-case agent nickname. New branches use
+`<nickname>/<feature>` (for example, `lin/translate-chat`), as defined in
+[worktrees-and-prs.md](../playbooks/worktrees-and-prs.md). Record the nickname
+and branch in the issue progress log; do not rename historical branches solely
+to meet this convention.
+
 For a new user-facing capability, start from
 `issues/templates/feature-request.md` and follow
 [feature-intake.md](../playbooks/feature-intake.md). For implementation, use
@@ -63,6 +70,7 @@ Every issue starts with this metadata block:
 
 Status: `pending`
 Owner: unassigned
+Agent nickname: unassigned
 Created: YYYY-MM-DD
 Updated: YYYY-MM-DD
 Related files: `path/one`, `path/two`
