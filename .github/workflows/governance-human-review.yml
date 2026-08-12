@@ -1,0 +1,76 @@
+name: Governance human review gate
+
+on:
+  pull_request:
+    types: [opened, reopened, synchronize, labeled, unlabeled, ready_for_review]
+  pull_request_review:
+    types: [submitted, edited, dismissed]
+
+permissions:
+  contents: read
+  pull-requests: read
+
+jobs:
+  governance-review-required:
+    name: governance-review-required
+    runs-on: ubuntu-latest
+    steps:
+      - name: Require labeled independent approval for governance changes
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const pr = context.payload.pull_request;
+            if (!pr) {
+              core.setFailed('This workflow must run in pull-request context.');
+              return;
+            }
+
+            const governedPath = (filename) =>
+              filename === 'README.md' ||
+              filename === 'AGENT.md' ||
+              filename === 'CLAUDE.md' ||
+              filename.startsWith('playbooks/') ||
+              filename.startsWith('docs/') ||
+              filename === 'issues/README.md' ||
+              filename.startsWith('issues/templates/');
+
+            const files = await github.paginate(github.rest.pulls.listFiles, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number,
+              per_page: 100,
+            });
+            const governedFiles = files.map((file) => file.filename).filter(governedPath);
+            if (governedFiles.length === 0) {
+              core.info('No governed guidance files changed. Human-review label is not required.');
+              return;
+            }
+
+            const labels = new Set(pr.labels.map((label) => label.name));
+            if (!labels.has('needs-human-review')) {
+              core.setFailed(`Governed guidance changed (${governedFiles.join(', ')}). Add the needs-human-review label before merge.`);
+              return;
+            }
+
+            const reviews = await github.paginate(github.rest.pulls.listReviews, {
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              pull_number: pr.number,
+              per_page: 100,
+            });
+            const latestReviewByUser = new Map();
+            for (const review of reviews) {
+              if (!review.user || review.user.login === pr.user.login || review.user.type === 'Bot') continue;
+              const previous = latestReviewByUser.get(review.user.login);
+              if (!previous || new Date(review.submitted_at) > new Date(previous.submitted_at)) {
+                latestReviewByUser.set(review.user.login, review);
+              }
+            }
+            const approvers = [...latestReviewByUser.values()]
+              .filter((review) => review.state === 'APPROVED')
+              .map((review) => review.user.login);
+            if (approvers.length === 0) {
+              core.setFailed('Governed guidance requires an independent non-bot GitHub PR approval. The needs-human-review label alone is not sufficient.');
+              return;
+            }
+            core.info(`Governance review satisfied by: ${approvers.join(', ')}`);
