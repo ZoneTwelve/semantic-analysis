@@ -29,6 +29,9 @@ jobs:
               filename === 'README.md' ||
               filename === 'AGENT.md' ||
               filename === 'CLAUDE.md' ||
+              filename.startsWith('.github/workflows/') ||
+              filename.startsWith('.github/actions/') ||
+              filename === '.github/dependabot.yml' ||
               filename.startsWith('playbooks/') ||
               filename.startsWith('docs/') ||
               filename === 'issues/README.md' ||
