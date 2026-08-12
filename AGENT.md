@@ -54,6 +54,13 @@ issue, changelog, and independent-review rules in that playbook.
   `issues/CHANGELOG.md`.
 - Do not include raw user content, credentials, or PII in issue files or
   changelogs.
+- For a new feature or app request, create an issue from
+  `issues/templates/feature-request.md` and follow
+  `playbooks/feature-intake.md` before implementation.
+- For code or governed-documentation implementation, use one issue-specific
+  branch/worktree and PR workflow from `playbooks/worktrees-and-prs.md`.
+  Inspect `git status --short` first and never modify another agent's dirty or
+  claimed files.
 
 ## Development stack
 
