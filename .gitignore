@@ -1,0 +1,28 @@
+# Private data, generated analysis results, and safety-review records.
+data/
+reports/
+
+# Local model artifacts and inference caches.
+models/
+checkpoints/
+model-cache/
+.cache/
+*.safetensors
+*.gguf
+*.onnx
+*.pt
+*.pth
+*.ckpt
+
+# Local model checkpoints and Python artifacts
+.venv/
+__pycache__/
+*.py[cod]
+.env
+.env.*
+
+# pnpm is the only supported JavaScript package manager.
+package-lock.json
+node_modules/
+test-results/
+playwright-report/
