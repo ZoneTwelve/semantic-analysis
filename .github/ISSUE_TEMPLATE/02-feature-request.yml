@@ -1,0 +1,40 @@
+name: Feature request
+description: Propose a user-facing capability or workflow improvement.
+title: "[Feature]: "
+labels: [feature, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        This GitHub issue is the public tracker. Before implementation, create
+        or link the corresponding local issue file using
+        `issues/templates/feature-request.md`.
+  - type: textarea
+    id: problem
+    attributes:
+      label: User problem
+      description: Describe the need without private conversation content or identifiers.
+    validations:
+      required: true
+  - type: textarea
+    id: outcome
+    attributes:
+      label: Desired outcome
+    validations:
+      required: true
+  - type: textarea
+    id: constraints
+    attributes:
+      label: Data, privacy, safety, and runtime constraints
+      description: State affected app/CLI, local/network boundary, persistence, and any reviewer needs.
+    validations:
+      required: true
+  - type: checkboxes
+    id: workflow
+    attributes:
+      label: Delivery workflow
+      options:
+        - label: I will link a local issue file before implementation begins.
+          required: true
+        - label: I have not included private conversation content, IDs, credentials, or PII.
+          required: true
