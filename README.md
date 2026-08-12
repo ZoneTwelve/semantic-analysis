@@ -12,6 +12,7 @@ and analysis-ready outputs.
 | `data/processed/emotion-evaluation/` | User-message candidates after safety filtering, ready for message-level inference. |
 | `data/processed/emotion-evaluation-qwen35/` | Conversation-level Qwen3.5 MLX results and run manifest. |
 | `src/` | Re-runnable transformation and evaluation scripts. |
+| `apps/` | Catalog of locally runnable applications and their ownership boundaries. |
 | `docs/` | Dataset contracts and workflow notes. |
 
 ## Current pipeline
@@ -30,6 +31,8 @@ and analysis-ready outputs.
    are written to `data/processed/emotion-evaluation-qwen35/` and are resumable.
 
 See [docs/data-contract.md](docs/data-contract.md) before adding derived data.
+See [apps/README.md](apps/README.md) for the application inventory; the repo
+currently has one local application, the Conversation Browser.
 For multi-step development work, follow the local
 [issue workflow](issues/README.md). Active work lives in `issues/active/`; only
 accepted work is moved to `issues/archive/done/` and summarized in the
