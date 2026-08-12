@@ -1,0 +1,39 @@
+name: Bug report
+description: Report a reproducible problem without private conversation content or identifiers.
+title: "[Bug]: "
+labels: [bug, triage]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Do not include conversation text, chat/user IDs, screenshots containing
+        private data, credentials, or safety-case details. Use the approved
+        private channel for sensitive reports.
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem
+      description: Describe the observed behavior and expected behavior using de-identified information.
+    validations:
+      required: true
+  - type: textarea
+    id: reproduction
+    attributes:
+      label: Safe reproduction steps
+      description: Include commands or synthetic-fixture steps only. Do not paste private data.
+    validations:
+      required: true
+  - type: textarea
+    id: validation
+    attributes:
+      label: Proposed validation
+      description: State the test or observable result that would confirm a fix.
+    validations:
+      required: true
+  - type: checkboxes
+    id: privacy
+    attributes:
+      label: Privacy confirmation
+      options:
+        - label: I have not included private conversation content, IDs, credentials, or PII.
+          required: true
