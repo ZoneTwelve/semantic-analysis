@@ -18,6 +18,11 @@ Every agent must complete the onboarding checklist and declare a role using
 agents may update playbooks and review system standards only through the
 documented issue, changelog, and independent-review workflow.
 
+For a feature/app request, use `issues/templates/feature-request.md` and read
+`playbooks/feature-intake.md`. For implementation, follow
+`playbooks/worktrees-and-prs.md`: one issue-specific branch/worktree and PR,
+with no edits to another agent's uncommitted or claimed files.
+
 For durable multi-step work, follow [issues/README.md](issues/README.md) as the
 local GitHub-issue/PR workflow: update status and progress before work, move to
 `in_review` only with validation evidence, and set `done` only after explicit

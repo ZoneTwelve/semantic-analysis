@@ -47,6 +47,12 @@ Use lowercase `snake_case` for `<issue>` and a three-digit, monotonically
 increasing `<id>`. Never rename an existing issue file after work begins,
 because the path is its stable local identifier.
 
+For a new user-facing capability, start from
+`issues/templates/feature-request.md` and follow
+[feature-intake.md](../playbooks/feature-intake.md). For implementation, use
+one issue branch/worktree and one pull request as defined in
+[worktrees-and-prs.md](../playbooks/worktrees-and-prs.md).
+
 ## Required issue format
 
 Every issue starts with this metadata block:

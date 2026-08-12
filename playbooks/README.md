@@ -16,6 +16,9 @@ and `issues/README.md`.
 | Major architecture, schema, model, or workflow changes | [upgrades.md](upgrades.md) |
 | Multiple agents, handoff, review, concurrent work | [collaboration.md](collaboration.md) |
 | Agent roles, authority, onboarding, governance | [roles-and-governance.md](roles-and-governance.md) |
+| Git worktrees, branches, pull requests, concurrent implementation | [worktrees-and-prs.md](worktrees-and-prs.md) |
+| New local applications or app changes | [app-development.md](app-development.md) |
+| New feature request, discovery, or product triage | [feature-intake.md](feature-intake.md) |
 
 Read every playbook that applies before making changes. If rules conflict, use
 this precedence order: user request → `AGENT.md` → `CLAUDE.md` → relevant
