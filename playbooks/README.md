@@ -15,10 +15,14 @@ and `issues/README.md`.
 | Dependency updates, migrations, repairs, cleanup | [maintenance.md](maintenance.md) |
 | Major architecture, schema, model, or workflow changes | [upgrades.md](upgrades.md) |
 | Multiple agents, handoff, review, concurrent work | [collaboration.md](collaboration.md) |
+| Agent roles, authority, onboarding, governance | [roles-and-governance.md](roles-and-governance.md) |
 
 Read every playbook that applies before making changes. If rules conflict, use
 this precedence order: user request → `AGENT.md` → `CLAUDE.md` → relevant
 playbook → issue-specific requirements → general documentation.
+
+Every agent must also complete the role-aware onboarding checklist in
+[roles-and-governance.md](roles-and-governance.md) before meaningful work.
 
 ## Core principles
 

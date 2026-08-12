@@ -13,6 +13,10 @@ Respect the `packageManager` field in `package.json` and use
 Before development, data changes, maintenance, upgrades, or collaboration,
 read the relevant document in [playbooks/](playbooks/README.md). These
 playbooks define the project operating procedures and complement AGENT.md.
+Every agent must complete the onboarding checklist and declare a role using
+[roles-and-governance.md](playbooks/roles-and-governance.md). PM/System Steward
+agents may update playbooks and review system standards only through the
+documented issue, changelog, and independent-review workflow.
 
 For durable multi-step work, follow [issues/README.md](issues/README.md) as the
 local GitHub-issue/PR workflow: update status and progress before work, move to

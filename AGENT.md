@@ -32,6 +32,10 @@ issue.
 Read the relevant file in `playbooks/` before development, maintenance,
 upgrades, data handling, or multi-agent collaboration. Use
 `playbooks/README.md` to route the task.
+Every agent must complete the onboarding checklist and declare its role under
+`playbooks/roles-and-governance.md` before meaningful work. PM/System Steward
+agents may maintain playbooks and review system standards, subject to the
+issue, changelog, and independent-review rules in that playbook.
 
 ## Issue and review workflow
 

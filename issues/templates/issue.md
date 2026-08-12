@@ -6,6 +6,16 @@ Created: YYYY-MM-DD
 Updated: YYYY-MM-DD
 Related files: `path/one`, `path/two`
 
+## Roles
+
+- Execution DRI: unassigned
+- Product / System Steward: unassigned
+- Engineering DRI: unassigned
+- Data / ML reviewer: not required
+- Safety / Privacy reviewer: not required
+- QA / Review approver: unassigned
+- Contributors: none
+
 ## Goal
 
 ## Scope

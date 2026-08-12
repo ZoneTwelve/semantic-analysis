@@ -60,6 +60,16 @@ Created: YYYY-MM-DD
 Updated: YYYY-MM-DD
 Related files: `path/one`, `path/two`
 
+## Roles
+
+- Execution DRI: unassigned
+- Product / System Steward: unassigned
+- Engineering DRI: unassigned
+- Data / ML reviewer: not required
+- Safety / Privacy reviewer: not required
+- QA / Review approver: unassigned
+- Contributors: none
+
 ## Goal
 
 ## Scope
@@ -105,6 +115,8 @@ Related files: `path/one`, `path/two`
 | `cancelled` | Intentionally stopped; no further work expected. | Record why and any replacement issue. |
 
 Only one issue owner may actively modify an `in_progress` issue at a time.
+For role responsibilities, approval independence, and multi-agent handoffs,
+follow [roles-and-governance.md](../playbooks/roles-and-governance.md).
 
 ## Working an issue
 
