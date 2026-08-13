@@ -1,6 +1,6 @@
 # ISSUE: Human-review gate enforcement follow-up
 
-Status: `pending`
+Status: `in_review`
 Owner: System Architect (Codex)
 Created: 2026-08-13
 Updated: 2026-08-13
@@ -52,7 +52,7 @@ can also invalidate the practical meaning of an earlier approval.
 
 ## Acceptance criteria
 
-- [ ] The policy states how approvals are invalidated or re-requested after a source-branch update.
+- [x] The policy states how approvals are invalidated or re-requested after a source-branch update.
 - [ ] `main` branch rules require the governance check when it applies and block ordinary merge until success.
 - [ ] Any permitted administrator/emergency bypass is explicitly scoped, logged, and followed by review.
 - [ ] The trusted reviewer identity/ownership model is documented.
@@ -60,9 +60,9 @@ can also invalidate the practical meaning of an earlier approval.
 
 ## Work plan
 
-- [ ] 1. Audit PR #9 review/check timeline and current GitHub ruleset.
-- [ ] 2. Write the decision record for stale approvals and bypass authority.
-- [ ] 3. Implement the minimum workflow/ruleset changes.
+- [x] 1. Audit PR #9 review/check timeline and current GitHub ruleset.
+- [x] 2. Write the decision record for stale approvals and bypass authority.
+- [x] 3. Implement the minimum workflow change for stale approvals.
 - [ ] 4. Validate with a non-production documentation PR.
 - [ ] 5. Obtain independent human approval before merge.
 
@@ -71,11 +71,13 @@ can also invalidate the practical meaning of an earlier approval.
 | Date | Status | Update | Evidence |
 | --- | --- | --- | --- |
 | 2026-08-13 | pending | Opened after PR #9 was force-merged while the governance human-review check was failing. | PR #9 status history |
+| 2026-08-13 | in_progress | Updated the governance workflow to require a formal GitHub `APPROVED` review attached to the current PR head SHA; earlier approvals no longer satisfy the CI gate after a push or rebase. CI configuration files are now governed paths. | `.github/workflows/governance-human-review.yml` |
+| 2026-08-13 | in_review | Static workflow review complete. GitHub branch ruleset configuration and independent review remain required before merge. | `git diff --check`, PR #12 |
 
 ## Review / PR record
 
-- Implementation: not started
-- Validation: not run
+- Implementation: formal approval must match the latest PR commit; CI configuration joins governed paths
+- Validation: `git diff --check`; workflow logic reviewed against GitHub review `commit_id` and PR `head.sha`
 - Data/privacy impact: GitHub PR metadata and branch-rule configuration only; no conversation data access
 - Reviewer: unassigned
 - Decision: pending
@@ -84,3 +86,4 @@ can also invalidate the practical meaning of an earlier approval.
 ## Changelog
 
 - 2026-08-13: Opened enforcement follow-up after a governance review check was bypassed by force merge.
+- 2026-08-13: Required a formal GitHub approval on the latest PR commit and made CI configuration a governed path.
