@@ -15,7 +15,7 @@ jobs:
     name: governance-review-required
     runs-on: ubuntu-latest
     steps:
-      - name: Require labeled independent approval for governance changes
+      - name: Require labeled approval for the latest governance change
         uses: actions/github-script@v7
         with:
           script: |
@@ -29,6 +29,7 @@ jobs:
               filename === 'README.md' ||
               filename === 'AGENT.md' ||
               filename === 'CLAUDE.md' ||
+              filename.startsWith('.github/') ||
               filename.startsWith('playbooks/') ||
               filename.startsWith('docs/') ||
               filename === 'issues/README.md' ||
@@ -67,10 +68,10 @@ jobs:
               }
             }
             const approvers = [...latestReviewByUser.values()]
-              .filter((review) => review.state === 'APPROVED')
+              .filter((review) => review.state === 'APPROVED' && review.commit_id === pr.head.sha)
               .map((review) => review.user.login);
             if (approvers.length === 0) {
-              core.setFailed('Governed guidance requires an independent non-bot GitHub PR approval. The needs-human-review label alone is not sufficient.');
+              core.setFailed(`Governed guidance requires an independent non-bot GitHub PR approval for the latest commit (${pr.head.sha}). Pushes and rebases require a new approval. The needs-human-review label alone is not sufficient.`);
               return;
             }
             core.info(`Governance review satisfied by: ${approvers.join(', ')}`);
